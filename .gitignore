@@ -1,0 +1,4 @@
+config.json
+state/
+*.log
+caddy/Caddyfile

@@ -1,0 +1,15 @@
+# Local proxy between tailscale serve and the camera software's web UI.
+# Why it exists: Agent DVR's free tier rejects clients it thinks are remote or proxied,
+# so this strips the forwarding headers and pins the Host before passing requests on.
+# Adjust the two ports: :9090 must match tailscale.servePort in config.json,
+# 8090 must match the camera web UI port.
+{
+	auto_https off
+}
+http://:9090 {
+	bind 127.0.0.1
+	reverse_proxy 127.0.0.1:8090 {
+		header_up -X-Forwarded-For / -X-Forwarded-Proto / -X-Forwarded-Host / -X-Real-IP
+		header_up Host 127.0.0.1:8090
+	}
+}

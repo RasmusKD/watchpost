@@ -1,0 +1,52 @@
+{
+  "liveUrl": "https://your-pc.your-tailnet.ts.net",
+  "discord": {
+    "webhookUrl": "",
+    "mention": "",
+    "everyone": true
+  },
+  "messages": {
+    "on": "Surveillance ON (camera, backup, lights, alarm). Live: {live} - keep the PC on and logged in (Win+L is fine).",
+    "onFailed": "Surveillance: startup FAILED - check the PC.",
+    "off": "Surveillance OFF - welcome home.",
+    "alarm": "ALARM! Motion at the camera. Live: {live}"
+  },
+  "camera": {
+    "serviceName": "Agent",
+    "configJson": "C:\\Program Files\\Agent\\Media\\XML\\config.json"
+  },
+  "proxy": {
+    "caddyExe": "C:\\path\\to\\caddy.exe",
+    "caddyDir": "C:\\path\\to\\watchpost\\caddy"
+  },
+  "tailscale": {
+    "exe": "C:\\Program Files\\Tailscale\\tailscale.exe",
+    "servePort": 9090
+  },
+  "hue": {
+    "bridgeIp": "",
+    "apiKey": "",
+    "groupIds": ["1", "2"],
+    "bedroomGroupId": "1",
+    "livingRoomGroupId": "2",
+    "suppressSeconds": 45,
+    "presence": {
+      "eveningStart": "20:30",
+      "bedtime": "22:35",
+      "morningStart": "06:00",
+      "morningEnd": "07:30",
+      "lateEveningChancePct": 30,
+      "nightBlipChancePct": 45
+    }
+  },
+  "sync": {
+    "rcloneExe": "C:\\path\\to\\rclone.exe",
+    "sourceDir": "C:\\path\\to\\recordings",
+    "sftpHost": "",
+    "sftpUser": "root",
+    "remotePath": "/srv/surveillance",
+    "keyFile": "C:\\Users\\you\\.ssh\\watchpost_sync_key",
+    "knownHostsFile": "",
+    "minAge": "30s"
+  }
+}
