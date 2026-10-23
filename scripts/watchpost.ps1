@@ -66,7 +66,11 @@ if ($Mode -eq 'On') {
     if ($state -eq 'Running') { break }
     if ($state -eq 'Stopped') { & $ts up 2>&1 | Out-Null }
     elseif (-not (Get-Process tailscale-ipn -ErrorAction SilentlyContinue)) {
-      Start-Process (Join-Path (Split-Path $ts) 'tailscale-ipn.exe')
+      # Launched through Explorer, never directly: started from here the GUI attaches to this
+      # elevated console, logs into it and keeps it open for its whole lifetime (closing that
+      # stale window killed Tailscale), and it would run elevated. Explorer starts it detached
+      # with the user's normal token, exactly like the login autostart does.
+      Start-Process explorer.exe -ArgumentList "`"$(Join-Path (Split-Path $ts) 'tailscale-ipn.exe')`""
     }
     Start-Sleep 2
   } while ((Get-Date) -lt $deadline)
